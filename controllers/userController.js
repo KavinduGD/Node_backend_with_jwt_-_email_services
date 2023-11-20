@@ -1,7 +1,12 @@
 const User = require("../models/userModel");
+const asyncHandler = require("express-async-handler");
 
-const registerUser = (req, res) => {
-  res.send("this is register mf");
+const registerUser = async (req, res) => {
+  if (!req.body.email) {
+    res.status(400);
+    throw new Error("Please add an email");
+  }
+  res.send("Register User");
 };
 
 module.exports = { registerUser };

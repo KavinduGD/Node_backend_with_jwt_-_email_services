@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./routes/userRoute");
 const morgan = require("morgan");
-
+const errorHandler = require("./middleware/errorMiddleware");
 const app = express();
 //middleware
 app.use(express.json());
@@ -15,8 +15,11 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("common"));
 
-//routes
+//Routes Middleware
 app.use("/api/user", userRoute);
+
+//ERROR Middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
