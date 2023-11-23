@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./routes/userRoute");
+const productRoute = require("./routes/productRoute");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/errorMiddleware");
 const cookieParser = require("cookie-parser");
@@ -20,7 +21,7 @@ app.use(morgan("common"));
 
 //Routes Middleware
 app.use("/api/user", userRoute);
-
+app.use("/api/product", productRoute);
 //ERROR Middleware
 app.use(errorHandler);
 
