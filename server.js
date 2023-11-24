@@ -6,22 +6,29 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
+const contactRoute = require("./routes/contactRoute");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/errorMiddleware");
 const cookieParser = require("cookie-parser");
-
+const multer = require("multer");
 const app = express();
+const path = require("path");
+
 //middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//app.use(multer().array());
 app.use(cors());
 app.use(morgan("common"));
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Routes Middleware
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
+app.use("/api/contact", contactRoute);
 //ERROR Middleware
 app.use(errorHandler);
 
